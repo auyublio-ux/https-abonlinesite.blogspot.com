@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ONLINE CITY ZONE SHOP — Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f3f6f9;
+      --primary-700:#1565c0;
+      --primary-600:#1e88e5;
+      --primary-400:#64b5f6;
+      --accent:#0b3d91;
+      --muted:#6c7a89;
+      --card-bg:#ffffff;
+      --radius:12px;
+      --container-max:1120px;
+      --shadow-1: 0 6px 24px rgba(16,24,40,0.08);
+      --shadow-2: 0 18px 50px rgba(16,24,40,0.12);
+      --success:#27ae60;
+      --warning:#f39c12;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Poppins", "Noto Sans Bengali", Arial, sans-serif;
+      background:linear-gradient(180deg,#eef6ff 0%, #f7fbff 100%);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding-bottom:40px;
+    }
+
+    .wrap{max-width:var(--container-max);margin:0 auto;padding:0 20px;}
+    .skip-link{position: absolute;left: -999px;top: auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:8px 12px;background:#000;color:#fff;border-radius:6px;z-index:1000}
+
+    /* PREMIUM HEADER */
+    header{
+      margin:18px 0 12px;
+      padding:18px;
+      border-radius:18px;
+      background: linear-gradient(135deg,var(--primary-700), var(--primary-600));
+      color:#fff;
+      box-shadow: var(--shadow-2);
+      position:relative;
+      overflow:visible;
+    }
+    .header-inner{ max-width:var(--container-max); margin:0 auto; width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+
+    .brand{ display:flex; align-items:center; gap:14px; flex:0 1 auto; min-width:0; }
+    .logo{ width:56px; height:56px; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#ffffff22, rgba(255,255,255,0.06)); border:1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 26px rgba(11,61,145,0.14); flex:0 0 auto; }
+    .site-title{ display:flex; flex-direction:column; line-height:1; margin-top:2px; min-width:0; }
+    .site-title .name{ font-weight:700; font-size:1rem; letter-spacing:0.2px; color:#fff; text-transform:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .site-title .tag{ font-weight:400; font-size:0.72rem; color: rgba(255,255,255,0.92); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .title-subnav{ margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .title-subnav a{ color:rgba(255,255,255,0.95); text-decoration:none; font-size:0.78rem; background: rgba(255,255,255,0.06); padding:6px 8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); white-space:nowrap; }
+
+    .header-actions{ display:flex; align-items:center; gap:8px; flex:0 1 auto; justify-content:flex-end; flex-wrap:wrap; min-width:0; }
+    .header-actions > *{ flex:0 0 auto; }
+    .nav-btn{ background: rgba(255,255,255,0.12); color:#fff; padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.12); font-weight:600; cursor:pointer; font-size:0.9rem; white-space:nowrap; }
+    .badges{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .badge{ background: rgba(255,255,255,0.12); color:#fff; padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.88rem; border:1px solid rgba(255,255,255,0.08); white-space:nowrap; }
+
+    /* user avatar in header */
+    .user-avatar {
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      background: #fff;
+      display:inline-block;
+    }
+    .greeting { color:#fff; font-weight:600; margin-left:8px; font-size:0.92rem; white-space:nowrap; }
+
+    /* content */
+    main{ max-width:var(--container-max); margin:12px auto; padding:0 20px; }
+    .products{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:12px; }
+    .card{ background: #fff; border-radius:12px; padding:12px; box-shadow: var(--shadow-1); display:flex; flex-direction:column; }
+    .card img{ width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px; }
+    .actions{ margin-top:auto; display:flex; gap:8px; justify-content:center; }
+    .btn{ padding:10px 12px; border-radius:10px; background:linear-gradient(90deg,var(--primary-600),var(--primary-400)); color:#fff; border:none; cursor:pointer; font-weight:700; font-size:0.95rem; }
+    .btn.secondary{ background:#eef3fb; color:var(--accent); }
+
+    footer{ max-width:var(--container-max); margin:28px auto 12px; text-align:center; color:var(--muted); font-size:0.95rem; }
+
+    /* MODALS */
+    .modal-backdrop{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(3,10,26,0.45); z-index:2000; padding:20px; }
+    .modal{ background:#fff; border-radius:12px; max-width:760px; width:100%; padding:18px; box-shadow:0 18px 60px rgba(3,10,26,0.2); max-height:90vh; overflow:auto; display:flex; flex-direction:column; }
+
+    .input{ padding:8px 10px; border-radius:8px; width:100%; font-size:0.95rem; border:1px solid #e6eef9; background:#fbfeff; }
+    label{ font-size:0.95rem; color:#23303a; margin-top:6px; display:block; }
+
+    /* COMPACT order modal styles (smaller inputs & tighter layout) */
+    #modal .modal-body{ padding:6px 0; display:flex; flex-direction:column; gap:8px; }
+    #modal .input[type="number"]{ max-width:120px; }
+    #modal fieldset{ padding:10px; border-radius:8px; font-size:0.92rem; }
+    #modal fieldset label{ font-size:0.9rem; margin-right:8px; }
+    #modal .payment-instruction{ font-size:0.9rem; color:var(--muted); margin-top:6px; }
+
+    /* modal footer: sticky and right-aligned buttons (fixed width) */
+    #modal .modal-footer{
+      position: -webkit-sticky;
+      position: sticky;
+      bottom: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,1));
+      padding:10px 0 0 0;
+      margin-top:8px;
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      border-top:1px solid #eef6ff;
+      z-index:50;
+    }
+    #modal .modal-footer .btn{
+      min-width:110px;
+      padding:9px 14px;
+      border-radius:10px;
+      font-weight:700;
+    }
+    /* make cancel visually muted and fixed width */
+    #modal .modal-footer .btn.secondary{ min-width:120px; background:#f1f5f9; color:#18324a; }
+
+    /* small helper for tight layout on small screens */
+    @media (max-width:760px){
+      .products{ grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+    }
+
+    @media (max-width:560px){
+      header{ padding:12px; border-radius:12px; }
+      .header-inner{ align-items:flex-start; gap:10px; }
+      .brand{ width:100%; justify-content:flex-start; gap:10px; }
+      .logo{ width:50px; height:50px; }
+      .site-title .name{ font-size:0.98rem; }
+      .title-subnav{ order:3; width:100%; gap:6px; }
+      .title-subnav a{ padding:6px 8px; font-size:0.78rem; }
+
+      /* Stack header actions on small screens so none are hidden */
+      .header-actions{
+        width:100%;
+        justify-content:flex-start;
+        gap:8px;
+        align-items:center;
+        padding-top:6px;
+        border-top:1px solid rgba(255,255,255,0.06);
+      }
+
+      .nav-btn{ padding:8px 10px; font-size:0.9rem; }
+      .badge{ padding:6px 8px; font-size:0.85rem; }
+      .greeting { display:inline-block; font-size:0.9rem; }
+
+      /* Ensure auth & user controls are visible and wrap */
+      #auth-controls, #user-controls { display:flex !important; gap:8px; align-items:center; flex-wrap:wrap; }
+
+      /* Make product cards a bit tighter */
+      .card{ padding:10px; }
+      .card img{ height:140px; }
+
+      /* Make modal footer buttons smaller */
+      #modal .modal-footer .btn{ min-width:88px; padding:8px 10px; font-size:0.9rem; }
+    }
+
+    /* Simple profile modal */
+    .profile-list .item{ padding:10px;border-bottom:1px solid #eef6ff; }
+    .profile-list .small-muted{ color:var(--muted); font-size:0.9rem; }
+
+    /* small product title/price */
+    .card h3{ margin:0 0 6px; font-size:1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .price{ color:var(--muted); font-weight:600; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">প্রধান বিষয়বস্তুতে যান</a>
+
+  <header>
+    <div class="header-inner wrap">
+      <div class="brand" aria-hidden="false">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="44" height="44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="lgA" x1="0" x2="1"><stop offset="0" stop-color="#6fb3ff"/><stop offset="1" stop-color="#1e88e5"/></linearGradient></defs>
+            <rect width="64" height="64" rx="12" fill="url(#lgA)"/>
+            <g transform="translate(9,9)"><circle cx="12" cy="12" r="10" fill="#fff" opacity="0.98"/><path d="M6 18 C12 6, 28 6, 34 18" stroke="#1e88e5" stroke-width="3" fill="none" stroke-linecap="round" /><rect x="16" y="8" width="6" height="8" rx="2" fill="#1e88e5" /></g>
+          </svg>
+        </span>
+
+        <div class="site-title">
+          <span class="name">ONLINE CITY ZONE SHOP</span>
+          <span class="tag">Quality • Trust • Fast Delivery</span>
+
+          <nav class="title-subnav" aria-label="Quick links under title">
+            <a href="#" id="sub-contact">Contact</a>
+            <a href="#" id="sub-about">About</a>
+            <!-- removed duplicate profile link here to keep single Profile control -->
+            <a href="#" id="sub-order">Orders</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="header-actions" role="navigation" aria-label="Site quick actions">
+        <div class="badges" aria-hidden="false">
+          <div id="orders-count-badge" class="badge orders" title="মোট অর্ডার">অর্ডার: 0</div>
+          <div id="pending-count-badge" class="badge pending" title="পেন্ডিং অর্ডার">পেন্ডিং: 0</div>
+        </div>
+
+        <div id="auth-controls">
+          <button class="nav-btn" id="btn-login-header">Login</button>
+          <button class="nav-btn" id="btn-signup-header">Sign up</button>
+        </div>
+
+        <div id="user-controls" style="display:none; align-items:center; gap:8px;">
+          <img id="user-avatar" class="user-avatar" src="" alt="profile photo" />
+          <span id="greeting" class="greeting"></span>
+          <button class="nav-btn" id="btn-profile-header">Profile</button>
+          <button class="nav-btn" id="btn-logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section aria-labelledby="products-heading">
+      <h2 id="products-heading" class="sr-only">পণ্য তালিকা</h2>
+
+      <!-- products container: items will be rendered by JS -->
+      <section id="products" class="products" aria-live="polite"></section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2025 ONLINE CITY ZONE SHOP — </div>
+  </footer>
+
+  <!-- About Modal -->
+  <div id="about-modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <header style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="margin:0">About</h2>
+        <button class="close-btn" data-close="about-modal">&times;</button>
+      </header>
+      <div style="margin-top:10px">
+        <p>ONLINE CITY ZONE — একটি পরিষ্কার ও দ্রুত ই‑কমার্স ডেমো।</p>
+        <p class="small-muted">ডেমো: পেমেন্ট বাস্তবায়নের জন্য অফিসিয়াল গেটওয়ে ও সার্ভার-ভেরিফিকেশন প্রয়োজন।</p>
+        <div style="margin-top:12px;text-align:right"><button class="btn secondary" data-close="about-modal">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contact-modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <header style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="margin:0">Contact</h2>
+        <button class="close-btn" data-close="contact-modal">&times;</button>
+      </header>
+      <form id="contact-form" style="margin-top:10px">
+        <label>আপনার নাম</label>
+        <input id="contactName" class="input" />
+        <label>ইমেইল / ফোন</label>
+        <input id="contactInfo" class="input" />
+        <label>বার্তা</label>
+        <textarea id="contactMessage" class="input" rows="4"></textarea>
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn">Send</button>
+          <button type="button" class="btn secondary" data-close="contact-modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Profile Modal (single instance) -->
+  <div id="profile-modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+      <header style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 id="profile-title" style="margin:0">প্রোফাইল</h2>
+        <button class="close-btn" data-close="profile-modal">&times;</button>
+      </header>
+
+      <div style="margin-top:10px">
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <button class="tabs" data-tab="profile">Profile</button>
+          <button class="tabs" data-tab="orders">Orders</button>
+          <button class="tabs" data-tab="contacts">Contacts</button>
+        </div>
+
+        <div id="profile-panel">
+          <form id="profile-form">
+            <label>Username</label><input id="profileUsername" class="input" readonly />
+            <label>নাম</label><input id="profileName" class="input" />
+            <label>ইমেইল</label><input id="profileEmail" class="input" type="email" />
+            <div style="margin-top:8px;text-align:right">
+              <button type="submit" class="btn">Save</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="orders-panel" style="display:none; margin-top:12px">
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <button class="btn secondary" id="filter-all">All</button>
+            <button class="btn" id="filter-pending">Pending</button>
+          </div>
+          <div id="orders-list" class="profile-list"></div>
+        </div>
+
+        <div id="contacts-panel" style="display:none; margin-top:12px">
+          <h3 style="margin-top:0">আপনার যোগাযোগসমূহ</h3>
+          <div id="contacts-list" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <h2 id="modal-title" style="margin:0;font-size:1.05rem">অর্ডার ফর্ম</h2>
+        <button class="close-btn" id="modal-close" aria-label="Close">×</button>
+      </header>
+
+      <form id="order-form">
+        <div class="modal-body" style="padding:0 6px 6px 0">
+          <p id="selected-product" style="margin:0 0 6px;font-weight:600;font-size:0.98rem"></p>
+
+          <input type="hidden" id="productName" />
+          <input type="hidden" id="productPrice" />
+
+          <label for="customerName">আপনার নাম</label>
+          <input id="customerName" class="input" required />
+
+          <label for="customerPhone">ফোন নম্বর</label>
+          <input id="customerPhone" class="input" required />
+
+          <label for="customerEmail">ইমেইল</label>
+          <input id="customerEmail" class="input" required />
+
+          <div style="display:flex;gap:8px;">
+            <div style="flex:1">
+              <label for="customerVillage">গ্রাম</label>
+              <input id="customerVillage" class="input" />
+            </div>
+            <div style="width:120px">
+              <label for="quantity">পরিমাণ</label>
+              <input id="quantity" class="input" name="quantity" type="number" min="1" value="1" />
+            </div>
+          </div>
+
+          <label for="customerAddress">ডেলিভারি ঠিকানা</label>
+          <textarea id="customerAddress" class="input" rows="2"></textarea>
+
+          <fieldset style="margin-top:6px">
+            <legend style="font-weight:600;font-size:0.95rem">পেমেন্ট পদ্ধতি</legend>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.92rem"><input type="radio" name="paymentMethod" value="nagad" checked /> Nagad</label>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.92rem"><input type="radio" name="paymentMethod" value="bkash" /> bKash</label>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:0.92rem"><input type="radio" name="paymentMethod" value="cod" /> Cash on Delivery (COD)</label>
+            </div>
+
+            <div class="payment-instruction" id="payment-instructions">
+              Nagad নম্বর: <strong id="nagad-number">01777951671</strong>
+            </div>
+
+            <div id="txn-row" style="margin-top:8px;display:block">
+              <label for="paymentTxn">Transaction ID (TXN)</label>
+              <input id="paymentTxn" class="input" type="text" placeholder="TXN123456789" />
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="modal-footer" role="toolbar" aria-label="Order actions">
+          <button type="button" class="btn secondary" id="modal-cancel">বাতিল</button>
+          <button type="submit" class="btn pay" id="pay-submit">পেমেন্ট নিশ্চিত করুন</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- LOGIN Modal -->
+  <div id="login-modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <header style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 id="login-title" style="margin:0">Login</h2>
+        <button class="close-btn" data-close="login-modal">&times;</button>
+      </header>
+      <form id="login-form" style="margin-top:10px">
+        <label>Username</label>
+        <input id="loginUsername" class="input" autocomplete="username" />
+        <label>Password</label>
+        <input id="loginPassword" class="input" type="password" autocomplete="current-password" />
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn secondary" data-close="login-modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SIGNUP Modal -->
+  <div id="signup-modal" class="modal-backdrop" role="presentation" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+      <header style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 id="signup-title" style="margin:0">Sign up</h2>
+        <button class="close-btn" data-close="signup-modal">&times;</button>
+      </header>
+      <form id="signup-form" style="margin-top:10px">
+        <label>Username (latin letters/numbers)</label>
+        <input id="signupUsername" class="input" autocomplete="username" />
+        <label>নাম</label>
+        <input id="signupName" class="input" />
+        <label>ইমেইল</label>
+        <input id="signupEmail" class="input" type="email" />
+        <label>Password</label>
+        <input id="signupPassword" class="input" type="password" autocomplete="new-password" />
+        <label>Confirm Password</label>
+        <input id="signupPasswordConfirm" class="input" type="password" autocomplete="new-password" />
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn">Create account</button>
+          <button type="button" class="btn secondary" data-close="signup-modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // --- local state (stored in localStorage) ---
+    const STORAGE_KEY = 'oczs_state_v2';
+    function loadState(){ try{ const s = localStorage.getItem(STORAGE_KEY); if(!s) return { users: [], currentUser: null, orders: [], contacts: [] }; const p = JSON.parse(s); if(!p.contacts) p.contacts = []; if(!p.users) p.users = []; if(!p.orders) p.orders = []; return p; }catch(e){ return { users: [], currentUser: null, orders: [], contacts: [] }; } }
+    function saveState(st){ localStorage.setItem(STORAGE_KEY, JSON.stringify(st)); }
+    let state = loadState();
+
+    // Price formatting
+    const formatter = new Intl.NumberFormat('bn-BD', { style: 'currency', currency: 'BDT', maximumFractionDigits: 0 });
+    function formatPrice(num){ return formatter.format(Number(num || 0)); }
+
+    // --- Product data and rendering (images use stable picsum seeds) ---
+    const productsList = [
+      { id: 'p1', name: 'পণ্য ১ — স্মার্ট ওয়াচ', price: 1500, img: 'https://picsum.photos/seed/watch/800/600' , desc: 'স্টাইলিশ স্মার্টওয়াচ' },
+      { id: 'p2', name: 'পণ্য ২ — ব্লুটুথ স্পিকার', price: 2200, img: 'https://picsum.photos/seed/speaker/800/600', desc: 'পোর্টেবল স্পিকার' },
+      { id: 'p3', name: 'পণ্য ৩ — ক্যামেরা লেন্স', price: 4300, img: 'https://picsum.photos/seed/lens/800/600', desc: 'প্রফেশনাল লেন্স' },
+      { id: 'p4', name: 'ডবি হেডফোন', price: 3200, img: 'https://picsum.photos/seed/headphone/800/600', desc: 'নয়েজ ক্যান্সেলিং হেডফোন' },
+      { id: 'p5', name: 'স্পোর্টস ব্যাগ', price: 850, img: 'https://picsum.photos/seed/bag/800/600', desc: 'টেকসই স্পোর্টস ব্যাগ' },
+      { id: 'p6', name: 'ফ্যাশন সানগ্লাস', price: 550, img: 'https://picsum.photos/seed/glasses/800/600', desc: 'UV সুরক্ষিত সানগ্লাস' }
+    ];
+
+    function renderProducts(){
+      const container = document.getElementById('products');
+      if(!container) return;
+      container.innerHTML = '';
+      productsList.forEach(p=>{
+        const article = document.createElement('article');
+        article.className = 'card';
+        article.setAttribute('itemscope','');
+        article.setAttribute('itemtype','http://schema.org/Product');
+        article.innerHTML = `
+          <img src="${p.img}" alt="${p.name} — ছবি" loading="lazy" itemprop="image" />
+          <h3 itemprop="name">${p.name}</h3>
+          <p class="price" data-price="${p.price}" aria-label="মূল্য">দাম: <span class="price-text"></span></p>
+          <p style="margin:6px 0 12px;color:var(--muted);font-size:0.95rem">${p.desc || ''}</p>
+          <div class="actions">
+            <button class="btn order-btn" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}">অর্ডার করুন</button>
+          </div>
+        `;
+        container.appendChild(article);
+      });
+
+      // format prices and wire order buttons
+      document.querySelectorAll('.price').forEach(el=>{
+        const price = Number(el.dataset.price || 0);
+        const display = el.querySelector('.price-text');
+        if(display) display.textContent = formatPrice(price);
+        else el.textContent = formatPrice(price);
+      });
+
+      wireOrderButtons();
+    }
+
+    // --- Modal helpers ---
+    function openBackdrop(id){ const b=document.getElementById(id); if(!b) return; b.style.display='flex'; b.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; b.__previousActive=document.activeElement; const toFocus=b.querySelector('input,button,textarea'); if(toFocus) setTimeout(()=>toFocus.focus(),30); }
+    function closeBackdrop(id){ const b=document.getElementById(id); if(!b) return; b.style.display='none'; b.setAttribute('aria-hidden','true'); document.body.style.overflow=''; try{ if(b.__previousActive && typeof b.__previousActive.focus==='function') b.__previousActive.focus(); }catch(e){} }
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ document.querySelectorAll('.modal-backdrop').forEach(b=>{ if(b.style.display==='flex') closeBackdrop(b.id); }); }});
+    document.querySelectorAll('.modal-backdrop').forEach(b=>{ b.addEventListener('click',(e)=>{ if(e.target===b) closeBackdrop(b.id); }); });
+    document.querySelectorAll('[data-close]').forEach(btn=> btn.addEventListener('click', ()=> closeBackdrop(btn.getAttribute('data-close')) ));
+
+    // --- Authentication helpers (no demo account) ---
+    // Hash password using SHA-256 via SubtleCrypto, return hex string
+    async function hashPassword(password){
+      const enc = new TextEncoder().encode(password);
+      const buf = await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    function findUserByUsername(username){
+      username = String(username || '').trim().toLowerCase();
+      state = loadState();
+      return (state.users || []).find(u => u.username === username);
+    }
+
+    function showAuthState(){
+      state = loadState();
+      if(state.currentUser){
+        document.getElementById('user-controls').style.display = 'flex';
+        document.getElementById('auth-controls').style.display = 'none';
+        const u = (state.users || []).find(x=>x.username === state.currentUser);
+        document.getElementById('greeting').textContent = u ? `Hi, ${u.name || u.username}` : `Hi, ${state.currentUser}`;
+        // set avatar if any (not implemented server-side)
+        if(u && u.avatar) document.getElementById('user-avatar').src = u.avatar;
+      } else {
+        document.getElementById('auth-controls').style.display = 'flex';
+        document.getElementById('user-controls').style.display = 'none';
+        document.getElementById('greeting').textContent = '';
+      }
+      updateOrdersBadges();
+    }
+
+    // Signup
+    const signupForm = document.getElementById('signup-form');
+    if(signupForm){
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const usernameRaw = document.getElementById('signupUsername').value.trim();
+        const username = usernameRaw.toLowerCase();
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const pass = document.getElementById('signupPassword').value;
+        const pass2 = document.getElementById('signupPasswordConfirm').value;
+
+        if(!username || !name || !email || !pass || !pass2){
+          alert('সব ফিল্ড পূরণ করুন।');
+          return;
+        }
+        if(!/^[a-z0-9._-]{3,30}$/.test(username)){
+          alert('Username-এ শুধু ল্যাটিন ছোট অক্ষর, সংখ্য বা ._- ব্যবহার করুন (৩-৩০ চর).');
+          return;
+        }
+        if(pass.length < 6){ alert('Password কমপক্ষে 6 অক্ষর হতে হবে।'); return; }
+        if(pass !== pass2){ alert('পাসওয়ার্ড মিলছে না।'); return; }
+
+        state = loadState();
+        if(state.users.some(u => u.username === username)){
+          alert('এই username ইতিমধ্যে আছে — অন্যটি দিন।');
+          return;
+        }
+
+        const passHash = await hashPassword(pass);
+        const user = {
+          id: Date.now(),
+          username,
+          name,
+          email,
+          passwordHash: passHash,
+          avatar: null,
+          createdAt: new Date().toISOString()
+        };
+        state.users = state.users || [];
+        state.users.push(user);
+        state.currentUser = username;
+        saveState(state);
+
+        // Clear signup form fields
+        signupForm.reset();
+        closeBackdrop('signup-modal');
+        showAuthState();
+        openBackdrop('profile-modal'); // open profile to let user see/edit profile
+        renderProfileForm();
+        alert('অকাউন্ট তৈরি করা হলো এবং লগ ইন করা হয়েছে।');
+      });
+    }
+
+    // Login
+    const loginForm = document.getElementById('login-form');
+    if(loginForm){
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+        const pass = document.getElementById('loginPassword').value;
+        if(!username || !pass){ alert('Username ও Password দিন।'); return; }
+        state = loadState();
+        const user = (state.users || []).find(u => u.username === username);
+        if(!user){ alert('ব্যবহারকারী পাওয়া যায়নি। দয়া করে সাইন আপ করুন।'); return; }
+        const passHash = await hashPassword(pass);
+        if(passHash !== user.passwordHash){ alert('Password ভুল।'); return; }
+        state.currentUser = username;
+        saveState(state);
+        loginForm.reset();
+        closeBackdrop('login-modal');
+        showAuthState();
+        alert('সফলভাবে লগ ইন করা হয়েছে।');
+      });
+    }
+
+    // Logout
+    document.getElementById('btn-logout').addEventListener('click', ()=> {
+      state = loadState();
+      state.currentUser = null;
+      saveState(state);
+      showAuthState();
+      alert('Logged out.');
+    });
+
+    // Profile form save (edit name/email)
+    const profileForm = document.getElementById('profile-form');
+    function renderProfileForm(){
+      state = loadState();
+      if(!state.currentUser){
+        document.getElementById('profileUsername').value = '';
+        document.getElementById('profileName').value = '';
+        document.getElementById('profileEmail').value = '';
+        return;
+      }
+      const u = (state.users||[]).find(x=>x.username === state.currentUser);
+      if(u){
+        document.getElementById('profileUsername').value = u.username || '';
+        document.getElementById('profileName').value = u.name || '';
+        document.getElementById('profileEmail').value = u.email || '';
+      }
+    }
+    if(profileForm){
+      profileForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        state = loadState();
+        if(!state.currentUser){ alert('আপনি লগইন করেননি।'); return; }
+        const u = (state.users||[]).find(x=>x.username === state.currentUser);
+        if(!u) return;
+        u.name = document.getElementById('profileName').value.trim();
+        u.email = document.getElementById('profileEmail').value.trim();
+        saveState(state);
+        alert('প্রোফাইল আপডেট হয়েছে।');
+        renderProfileForm();
+        showAuthState();
+      });
+    }
+
+    // --- Header & profile helpers (orders badges + orders rendering) ---
+    function updateOrdersBadges(){
+      state = loadState();
+      const count = (state.orders || []).length || 0;
+      const pending = (state.orders || []).filter(o => o.paymentStatus && o.paymentStatus !== 'paid').length;
+      const ordersBadge = document.getElementById('orders-count-badge');
+      const pendingBadge = document.getElementById('pending-count-badge');
+      if(ordersBadge) ordersBadge.textContent = 'অর্ডার: ' + count;
+      if(pendingBadge) pendingBadge.textContent = 'পেন্ডিং: ' + pending;
+    }
+
+    function renderOrders(filter){
+      state = loadState();
+      const list = document.getElementById('orders-list');
+      if(!list) return;
+      list.innerHTML = '';
+      if(!state.currentUser){ list.innerHTML = '<div class="item">Please login to see your orders.</div>'; return; }
+      let orders = (state.orders||[]).slice().reverse().filter(o=>o.user === state.currentUser);
+      if(filter === 'pending') orders = orders.filter(o => o.paymentStatus && o.paymentStatus !== 'paid');
+      if(!orders.length){ list.innerHTML = '<div class="item">কোন অর্ডার নেই।</div>'; return; }
+      orders.forEach(o=>{
+        const d = new Date(o.when);
+        const status = o.paymentStatus === 'paid' ? 'Paid' : 'Pending';
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `<strong>${o.product}</strong> — ${o.qty} × ${formatPrice(o.price)} = <strong>${formatPrice(o.total)}</strong>
+          <div class="small-muted">${o.customerName} • ${o.customerPhone} • ${o.customerEmail || '-'}</div>
+          <div style="margin-top:6px">${o.customerAddress}</div>
+          <div class="small-muted" style="margin-top:6px">Payment: ${o.paymentMethod.toUpperCase()} ${o.paymentTxn ? ' • TXN: ' + o.paymentTxn : ''}</div>
+          <div class="small-muted" style="margin-top:6px">${d.toLocaleString('bn-BD')}</div>
+          <div style="margin-top:6px"><strong>${status}</strong></div>`;
+        list.appendChild(div);
+      });
+    }
+
+    // contacts render
+    function renderContacts(){
+      state = loadState();
+      const el = document.getElementById('contacts-list');
+      if(!el) return;
+      el.innerHTML = '';
+      const contacts = (state.contacts || []).slice().reverse();
+      if(!contacts.length){ el.innerHTML = '<div class="item">কোন যোগাযোগ বার্তা নেই।</div>'; return; }
+      contacts.forEach(c=>{
+        const d = new Date(c.when);
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `<strong>${c.name}</strong> — <span class="small-muted">${c.info}</span>
+          <div style="margin-top:6px">${c.message}</div>
+          <div class="small-muted" style="margin-top:6px">${d.toLocaleString('bn-BD')}</div>`;
+        el.appendChild(item);
+      });
+    }
+
+    // profile tabs wiring
+    document.querySelectorAll('#profile-modal .tabs').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const tab = btn.getAttribute('data-tab');
+        document.querySelectorAll('#profile-modal .tabs').forEach(t=> t.classList.remove('active'));
+        btn.classList.add('active');
+        if(tab === 'profile'){
+          document.getElementById('profile-panel').style.display = '';
+          document.getElementById('orders-panel').style.display = 'none';
+          document.getElementById('contacts-panel').style.display = 'none';
+          renderProfileForm();
+        } else if(tab === 'orders'){
+          document.getElementById('profile-panel').style.display = 'none';
+          document.getElementById('orders-panel').style.display = '';
+          document.getElementById('contacts-panel').style.display = 'none';
+          renderOrders('all');
+        } else if(tab === 'contacts'){
+          document.getElementById('profile-panel').style.display = 'none';
+          document.getElementById('orders-panel').style.display = 'none';
+          document.getElementById('contacts-panel').style.display = '';
+          renderContacts();
+        }
+      });
+    });
+
+    document.getElementById('filter-all').addEventListener('click', ()=> renderOrders('all'));
+    document.getElementById('filter-pending').addEventListener('click', ()=> renderOrders('pending'));
+
+    // subnav quick links wiring
+    document.getElementById('sub-about').addEventListener('click', (e)=>{ e.preventDefault(); openBackdrop('about-modal'); });
+    document.getElementById('sub-contact').addEventListener('click', (e)=>{ e.preventDefault(); openBackdrop('contact-modal'); });
+    document.getElementById('sub-order').addEventListener('click', (e)=>{ e.preventDefault(); openProfileOrders('all'); });
+
+    // open profile/orders helper
+    function openProfileOrders(filter){
+      openBackdrop('profile-modal');
+      document.querySelectorAll('#profile-modal .tabs').forEach(t=> t.classList.remove('active'));
+      const ordersBtn = document.querySelector('#profile-modal .tabs[data-tab="orders"]');
+      if(ordersBtn) ordersBtn.classList.add('active');
+      document.getElementById('profile-panel').style.display = 'none';
+      document.getElementById('orders-panel').style.display = '';
+      document.getElementById('contacts-panel').style.display = 'none';
+      renderOrders(filter || 'all');
+    }
+
+    // --- Order modal behavior (open, submit -> add order) ---
+    const selectedProduct = document.getElementById('selected-product');
+    const productNameInput = document.getElementById('productName');
+    const productPriceInput = document.getElementById('productPrice');
+    const quantityInput = document.getElementById('quantity');
+    const nagadNumberEl = document.getElementById('nagad-number');
+    const paymentTxnInput = document.getElementById('paymentTxn');
+    const FIXED_NAGAD_NUMBER = '01777951671';
+    if(nagadNumberEl) nagadNumberEl.textContent = FIXED_NAGAD_NUMBER;
+
+    function updatePaymentInstructions(){
+      const method = document.querySelector('#modal input[name="paymentMethod"]:checked')?.value || 'nagad';
+      const instr = document.getElementById('payment-instructions');
+      if(method === 'nagad'){ instr.textContent = 'Nagad নম্বর: ' + FIXED_NAGAD_NUMBER; document.getElementById('txn-row').style.display='block'; paymentTxnInput.placeholder = 'Nagad TXN'; }
+      else if(method === 'bkash'){ instr.textContent = 'bKash নম্বর: (আপনার)'; document.getElementById('txn-row').style.display='block'; paymentTxnInput.placeholder = 'bKash TXN'; }
+      else { instr.textContent = 'Cash on Delivery (COD) — পেমেন্ট ডেলিভারির সময়।'; document.getElementById('txn-row').style.display='none'; paymentTxnInput.value=''; }
+    }
+    document.querySelectorAll('#modal input[name="paymentMethod"]').forEach(r => r.addEventListener('change', updatePaymentInstructions));
+
+    function wireOrderButtons(){
+      document.querySelectorAll('.order-btn').forEach(btn=>{
+        btn.replaceWith(btn.cloneNode(true));
+      });
+      document.querySelectorAll('.order-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=> {
+          // require login to open order modal
+          state = loadState();
+          if(!state.currentUser){
+            if(confirm('অর্ডার করতে হলে আপনাকে প্রথমে লগইন/সাইন-আপ করতে হবে — এখন লগইন পেজ খোলি?')) {
+              openBackdrop('login-modal');
+            }
+            return;
+          }
+
+          const name = btn.dataset.name; const price = btn.dataset.price;
+          selectedProduct.textContent = name + ' — ' + formatPrice(Number(price));
+          productNameInput.value = name; productPriceInput.value = price; quantityInput.value = 1;
+          const nagadRadio = document.querySelector('#modal input[name="paymentMethod"][value="nagad"]');
+          if(nagadRadio) nagadRadio.checked = true;
+          updatePaymentInstructions();
+          openBackdrop('modal');
+        });
+      });
+    }
+
+    document.getElementById('modal-cancel').addEventListener('click', ()=> closeBackdrop('modal'));
+    document.getElementById('modal-close').addEventListener('click', ()=> closeBackdrop('modal'));
+
+    const orderForm = document.getElementById('order-form');
+    if(orderForm){
+      orderForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        state = loadState();
+        if(!state.currentUser){ alert('Please login to place order'); return; }
+        const custName = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const email = document.getElementById('customerEmail').value.trim();
+        const address = document.getElementById('customerAddress').value.trim();
+        const product = productNameInput.value;
+        const price = Number(productPriceInput.value || 0);
+        const qty = Number(quantityInput.value || 1);
+        const paymentMethod = document.querySelector('#modal input[name="paymentMethod"]:checked')?.value || 'nagad';
+        let txn = paymentTxnInput.value.trim();
+
+        if(!custName || !phone || !email || !address){ alert('নাম, ফোন, ইমেইল ও ঠিকানা অবশ্যই পূরণ করুন।'); return; }
+
+        if(paymentMethod !== 'cod' && !txn){
+          if(confirm('আপনি TXN লিখেননি — কি আপনি একটি ডেমো TXN জেনারেট করবেন? OK = জেনারেট')) { txn = 'TXN'+Math.floor(Math.random()*900000+100000)+Date.now().toString().slice(-5); alert('ডেমো TXN: '+txn); } else { return; }
+        }
+
+        const total = price * qty;
+        const order = {
+          id: Date.now(),
+          product, price, qty, total,
+          customerName: custName, customerPhone: phone, customerEmail: email,
+          customerAddress: address, paymentMethod,
+          paymentTxn: paymentMethod==='cod' ? '' : txn,
+          paymentStatus: paymentMethod==='cod' ? 'pending' : 'paid',
+          user: state.currentUser,
+          when: new Date().toISOString()
+        };
+        state.orders = state.orders || [];
+        state.orders.push(order);
+        saveState(state);
+
+        updateOrdersBadges();
+        closeBackdrop('modal');
+        openProfileOrders('all');
+        alert('অর্ডার রেকর্ড করা হয়েছে, ধন্যবাদ!');
+      });
+    }
+
+    // Contact form
+    const contactForm = document.getElementById('contact-form');
+    if(contactForm){
+      contactForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const name = document.getElementById('contactName').value.trim();
+        const info = document.getElementById('contactInfo').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+        if(!name || !info || !message){ alert('সব ফিল্ড পূরণ করুন।'); return; }
+        state = loadState();
+        state.contacts = state.contacts || [];
+        const contact = { id: Date.now(), name, info, message, when: new Date().toISOString() };
+        state.contacts.push(contact);
+        saveState(state);
+        closeBackdrop('contact-modal');
+        alert('ধন্যবাদ — আপনার বার্তা গ্রহণ করা হয়েছে।');
+      });
+    }
+
+    // Login/Signup button open modals
+    document.getElementById('btn-login-header').addEventListener('click', ()=> openBackdrop('login-modal'));
+    document.getElementById('btn-signup-header').addEventListener('click', ()=> openBackdrop('signup-modal'));
+
+    // Profile header button
+    const btnProfileHeader = document.getElementById('btn-profile-header');
+    if(btnProfileHeader){
+      btnProfileHeader.addEventListener('click', ()=> {
+        state = loadState();
+        if(!state.currentUser){
+          alert('প্রোফাইল দেখার জন্য আগে লগইন করুন।');
+          openBackdrop('login-modal');
+          return;
+        }
+        openBackdrop('profile-modal');
+        document.querySelectorAll('#profile-modal .tabs').forEach(t=> t.classList.remove('active'));
+        const pbtn = document.querySelector('#profile-modal .tabs[data-tab="profile"]');
+        if(pbtn) pbtn.classList.add('active');
+        document.getElementById('profile-panel').style.display = '';
+        document.getElementById('orders-panel').style.display = 'none';
+        document.getElementById('contacts-panel').style.display = 'none';
+        renderProfileForm();
+        renderContacts();
+      });
+    }
+
+    // Initialize UI on load
+    (function init(){
+      renderProducts();
+      showAuthState();
+      // Ensure order buttons check login before opening
+      wireOrderButtons();
+      updateOrdersBadges();
+    })();
+  </script>
+</body>
+</html>
